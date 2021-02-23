@@ -1,0 +1,2 @@
+﻿
+dotnet ef dbcontext scaffold "Server=104.198.137.135;Database=MarketData;User Id=root;Password=admin;"  MySql.Data.EntityFrameworkCore -o Models --context "DBContext" --no-pluralize --force

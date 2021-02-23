@@ -71,7 +71,9 @@ namespace BrighterCapAPI.Controllers
         [Route("PostArray")]
         public async Task<ActionResult> PostValuationData(Valuation[] valuation)
         {
-            await _context.Valuation.AddOrUpdateRange(valuation, _context, (item1, item2) =>
+            var data = valuation.GroupBy(row => (row.ParcelId, row.ValuationDate)).Select(group => group.FirstOrDefault()).ToList();
+
+            await _context.Valuation.AddOrUpdateRange(data, _context, (item1, item2) =>
                  item1.ParcelId == item2.ParcelId &&
                  item1.ValuationDate == item2.ValuationDate);
 

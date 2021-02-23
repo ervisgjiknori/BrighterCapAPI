@@ -102,7 +102,8 @@ namespace BrighterCapAPI.Controllers
         [Route("PostArray")]
         public async Task<ActionResult> PostSalesData(Sales[] sales)
         {
-            await _context.Sales.AddOrUpdateRange(sales, _context, (item1, item2) =>
+            var data = sales.GroupBy(row => (row.ParcelId, row.SaleDate)).Select(group => group.FirstOrDefault()).ToList();
+            await _context.Sales.AddOrUpdateRange(data, _context, (item1, item2) =>
                  item1.ParcelId == item2.ParcelId &&
                  item1.SaleDate == item2.SaleDate);
 

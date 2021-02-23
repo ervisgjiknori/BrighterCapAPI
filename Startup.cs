@@ -1,6 +1,7 @@
 using BrighterCapAPI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -33,7 +34,7 @@ namespace BrighterCapAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BrighterCapAPI", Version = "v1" });
             });
-            services.AddDbContext<DBContext>();
+            services.AddDbContext<DBContext>(context => context.EnableDetailedErrors().EnableSensitiveDataLogging());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +57,7 @@ namespace BrighterCapAPI
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

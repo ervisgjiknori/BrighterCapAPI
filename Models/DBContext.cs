@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace BrighterCapAPI.Models
 {
@@ -25,24 +27,22 @@ namespace BrighterCapAPI.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=35.232.153.216;Database=MarketData;User Id=sqlserver;Password=Dev2021!;MultipleActiveResultSets=True;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseMySQL("Server=104.198.137.135;Database=MarketData;User Id=root;Password=admin;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<CountyData>(entity =>
             {
                 entity.HasKey(e => e.ParcelId)
-                    .HasName("PK__CountyDa__B5F2165BCD3517C8");
+                    .HasName("PRIMARY");
 
                 entity.Property(e => e.ParcelId)
+                    .HasColumnName("ParcelID")
                     .HasMaxLength(225)
-                    .IsUnicode(false)
-                    .HasColumnName("ParcelID");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Category)
                     .IsRequired()
@@ -59,28 +59,29 @@ namespace BrighterCapAPI.Models
                     .HasMaxLength(225)
                     .IsUnicode(false);
 
+                entity.Property(e => e.DateOfListing).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DefendantInFifa)
                     .IsRequired()
                     .HasMaxLength(225)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Ltv)
-                    .HasColumnType("decimal(10, 3)")
-                    .HasColumnName("LTV");
+                    .HasColumnName("LTV")
+                    .HasColumnType("decimal(10,3)");
 
                 entity.Property(e => e.MailingAddress)
-                    .IsRequired()
-                    .HasMaxLength(225)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.NumberOfYears).HasColumnType("int(11)");
+
                 entity.Property(e => e.PropertyAddress)
-                    .IsRequired()
-                    .HasMaxLength(225)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PropertyClass)
-                    .IsRequired()
-                    .HasMaxLength(225)
+                    .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TaxYearsDue)
@@ -88,35 +89,41 @@ namespace BrighterCapAPI.Models
                     .HasMaxLength(225)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TaxesOwed).HasColumnType("decimal(10, 3)");
+                entity.Property(e => e.TaxesOwed).HasColumnType("decimal(10,3)");
             });
 
             modelBuilder.Entity<Sales>(entity =>
             {
-                entity.HasKey(e => new { e.ParcelId, e.SaleDate });
+                entity.HasKey(e => new { e.ParcelId, e.SaleDate })
+                    .HasName("PRIMARY");
 
                 entity.Property(e => e.ParcelId)
+                    .HasColumnName("ParcelID")
                     .HasMaxLength(225)
-                    .IsUnicode(false)
-                    .HasColumnName("ParcelID");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.SalePrice).HasColumnType("decimal(10, 3)");
+                entity.Property(e => e.SaleDate).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.SalePrice).HasColumnType("decimal(13,3)");
             });
 
             modelBuilder.Entity<Valuation>(entity =>
             {
-                entity.HasKey(e => new { e.ParcelId, e.ValuationDate });
+                entity.HasKey(e => new { e.ParcelId, e.ValuationDate })
+                    .HasName("PRIMARY");
 
                 entity.Property(e => e.ParcelId)
+                    .HasColumnName("ParcelID")
                     .HasMaxLength(225)
-                    .IsUnicode(false)
-                    .HasColumnName("ParcelID");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.AppraisedValue).HasColumnType("decimal(10, 3)");
+                entity.Property(e => e.ValuationDate).HasColumnType("datetime(6)");
 
-                entity.Property(e => e.BuildingValue).HasColumnType("decimal(10, 3)");
+                entity.Property(e => e.AppraisedValue).HasColumnType("decimal(10,3)");
 
-                entity.Property(e => e.LandValue).HasColumnType("decimal(10, 3)");
+                entity.Property(e => e.BuildingValue).HasColumnType("decimal(10,3)");
+
+                entity.Property(e => e.LandValue).HasColumnType("decimal(10,3)");
             });
 
             OnModelCreatingPartial(modelBuilder);

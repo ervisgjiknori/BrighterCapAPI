@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace BrighterCapAPI.Models
 {
@@ -9,6 +11,6 @@ namespace BrighterCapAPI.Models
     {
         public string ParcelId { get; set; }
         public DateTime SaleDate { get; set; }
-        public decimal SalePrice { get; set; }
+        public decimal? SalePrice { get; set; }
     }
 }
