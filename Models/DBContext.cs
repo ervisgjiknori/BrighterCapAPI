@@ -119,11 +119,11 @@ namespace BrighterCapAPI.Models
 
                 entity.Property(e => e.ValuationDate).HasColumnType("datetime(6)");
 
-                entity.Property(e => e.AppraisedValue).HasColumnType("decimal(10,3)");
+                entity.Property(e => e.AppraisedValue).HasColumnType("decimal(18,3)");
 
-                entity.Property(e => e.BuildingValue).HasColumnType("decimal(10,3)");
+                entity.Property(e => e.BuildingValue).HasColumnType("decimal(18,3)");
 
-                entity.Property(e => e.LandValue).HasColumnType("decimal(10,3)");
+                entity.Property(e => e.LandValue).HasColumnType("decimal(18,3)");
             });
 
             OnModelCreatingPartial(modelBuilder);

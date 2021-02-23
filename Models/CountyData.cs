@@ -22,5 +22,7 @@ namespace BrighterCapAPI.Models
         public decimal? Ltv { get; set; }
         public string TaxYearsDue { get; set; }
         public string MailingAddress { get; set; }
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
     }
 }
