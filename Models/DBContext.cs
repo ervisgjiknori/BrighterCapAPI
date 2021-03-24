@@ -20,6 +20,9 @@ namespace BrighterCapAPI.Models
         }
 
         public virtual DbSet<CountyData> CountyData { get; set; }
+        public virtual DbSet<LastData> LastData { get; set; }
+        public virtual DbSet<LastSale> LastSale { get; set; }
+        public virtual DbSet<LastValuation> LastValuation { get; set; }
         public virtual DbSet<Sales> Sales { get; set; }
         public virtual DbSet<Valuation> Valuation { get; set; }
 
@@ -55,7 +58,6 @@ namespace BrighterCapAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.CurrentRecordHolder)
-                    .IsRequired()
                     .HasMaxLength(225)
                     .IsUnicode(false);
 
@@ -63,7 +65,7 @@ namespace BrighterCapAPI.Models
 
                 entity.Property(e => e.DefendantInFifa)
                     .IsRequired()
-                    .HasMaxLength(225)
+                    .HasMaxLength(1000)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Ltv)
@@ -90,6 +92,151 @@ namespace BrighterCapAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.TaxesOwed).HasColumnType("decimal(10,3)");
+            });
+
+            modelBuilder.Entity<LastData>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("LastData");
+
+                entity.HasComment("View 'MarketData.LastData' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them");
+            });
+
+            modelBuilder.Entity<LastSale>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("LastSale");
+
+                entity.Property(e => e.Category)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.County)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrentRecordHolder)
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateOfListing).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DefendantInFifa)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastSalePrice).HasColumnType("decimal(13,3)");
+
+                entity.Property(e => e.Ltv)
+                    .HasColumnName("LTV")
+                    .HasColumnType("decimal(17,7)");
+
+                entity.Property(e => e.MailingAddress)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumberOfYears).HasColumnType("int(11)");
+
+                entity.Property(e => e.ParcelId)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PropertyAddress)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PropertyClass)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RowNum)
+                    .HasColumnName("rowNum")
+                    .HasColumnType("bigint(21) unsigned");
+
+                entity.Property(e => e.SaleDate).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.TaxYearsDue)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxesOwed)
+                    .HasColumnName("taxesOwed")
+                    .HasColumnType("decimal(10,3)");
+            });
+
+            modelBuilder.Entity<LastValuation>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("LastValuation");
+
+                entity.Property(e => e.AppraisedValue).HasColumnType("decimal(18,3)");
+
+                entity.Property(e => e.BuildingValue).HasColumnType("decimal(18,3)");
+
+                entity.Property(e => e.Category)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.County)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CurrentRecordHolder)
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateOfListing).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DefendantInFifa)
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LandValue).HasColumnType("decimal(18,3)");
+
+                entity.Property(e => e.MailingAddress)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NumberOfYears).HasColumnType("int(11)");
+
+                entity.Property(e => e.ParcelId)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PropertyAddress)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PropertyClass)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RowNum)
+                    .HasColumnName("rowNum")
+                    .HasColumnType("bigint(21) unsigned");
+
+                entity.Property(e => e.TaxYearsDue)
+                    .IsRequired()
+                    .HasMaxLength(225)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TaxesOwed)
+                    .HasColumnName("taxesOwed")
+                    .HasColumnType("decimal(10,3)");
+
+                entity.Property(e => e.ValuationDate).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Sales>(entity =>
