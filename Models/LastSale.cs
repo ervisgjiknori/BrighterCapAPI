@@ -23,7 +23,8 @@ namespace BrighterCapAPI.Models
         public string MailingAddress { get; set; }
         public decimal? LastSalePrice { get; set; }
         public DateTime? SaleDate { get; set; }
-        public decimal? Ltv { get; set; }
+        public decimal? Bedrooms { get; set; }
+        public decimal? Bathrooms { get; set; }
         public long RowNum { get; set; }
     }
 }

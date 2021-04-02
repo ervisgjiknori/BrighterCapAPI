@@ -71,7 +71,13 @@ namespace BrighterCapAPI.Controllers
         [Route("PostArray")]
         public async Task<ActionResult> PostCountyDataData(CountyData[] countyData)
         {
+            var distinctDates = countyData.Select(row => row.DateOfListing).Distinct();
+
+            foreach (var date in distinctDates)
+                _context.CountyData.RemoveRange(_context.CountyData.Where(row => row.DateOfListing == date));
+
             var data = countyData.GroupBy(row => row.ParcelId).Select(group => group.FirstOrDefault()).ToList();
+
             await _context.CountyData.AddOrUpdateRange(data, _context, (item1, item2) =>
                 item1.ParcelId == item2.ParcelId);
             return StatusCode(201);

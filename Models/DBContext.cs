@@ -47,6 +47,10 @@ namespace BrighterCapAPI.Models
                     .HasMaxLength(225)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Bathrooms).HasColumnType("decimal(10,3)");
+
+                entity.Property(e => e.Bedrooms).HasColumnType("decimal(10,3)");
+
                 entity.Property(e => e.Category)
                     .IsRequired()
                     .HasMaxLength(225)
@@ -86,6 +90,8 @@ namespace BrighterCapAPI.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.SquareFeet).HasColumnType("decimal(10,3)");
+
                 entity.Property(e => e.TaxYearsDue)
                     .IsRequired()
                     .HasMaxLength(225)
@@ -109,6 +115,10 @@ namespace BrighterCapAPI.Models
 
                 entity.ToView("LastSale");
 
+                entity.Property(e => e.Bathrooms).HasColumnType("decimal(10,3)");
+
+                entity.Property(e => e.Bedrooms).HasColumnType("decimal(10,3)");
+
                 entity.Property(e => e.Category)
                     .IsRequired()
                     .HasMaxLength(225)
@@ -131,10 +141,6 @@ namespace BrighterCapAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.LastSalePrice).HasColumnType("decimal(13,3)");
-
-                entity.Property(e => e.Ltv)
-                    .HasColumnName("LTV")
-                    .HasColumnType("decimal(17,7)");
 
                 entity.Property(e => e.MailingAddress)
                     .HasMaxLength(255)

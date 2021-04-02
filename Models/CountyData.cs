@@ -24,5 +24,8 @@ namespace BrighterCapAPI.Models
         public string MailingAddress { get; set; }
         public double? Longitude { get; set; }
         public double? Latitude { get; set; }
+        public decimal? Bedrooms { get; set; }
+        public decimal? Bathrooms { get; set; }
+        public decimal? SquareFeet { get; set; }
     }
 }
